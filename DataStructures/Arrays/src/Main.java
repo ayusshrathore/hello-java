@@ -7,6 +7,9 @@ public class Main {
         arrays.insert(5);
         arrays.removeAt(1);
         arrays.print();
+        arrays.indexOf(5);
+        int result = arrays.indexOf(5);
+        System.out.println(result);
 
     }
 }
