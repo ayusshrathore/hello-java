@@ -361,6 +361,8 @@ public class Main {
         // for each loop
         // limitations: it's always iterates in forward direction also we doesn't have
         // access to index of item
+        // In Java we can't use a for each loop on String but we can convert the string
+        // to charArray()
         String[] persons = { "John", "Jane", "Jack" };
         for (int i = 0; i < persons.length; i++) {
             System.out.println(persons[i]);
@@ -386,6 +388,7 @@ public class Main {
         // execution of jar file: java -jar <jar file name>
 
         // Module: another level of abstraction over a package
+        scanner.close();
 
     }
 
