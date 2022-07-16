@@ -14,7 +14,7 @@ public class Main {
         /**
          * Derived from java.util.LinkedList
          */
-        LinkedList list = new LinkedList();
+        LinkedList<Integer> list = new LinkedList<>();
         list.add(10);
         list.add(20);
         list.add(30);
@@ -37,14 +37,21 @@ public class Main {
         list2.addLast(2);
         list2.addLast(3);
         list2.addLast(4);
-        // list2.print();
-        // list2.reverse();
-        // list2.print();
-        // list2.reverseLinkedList();
-        // list2.print();
+        list2.addLast(4);
+        list2.addLast(5);
+        list2.print();
+        list2.reverse();
+        list2.print();
+        list2.reverseLinkedList();
+        list2.print();
         var kThElement = list2.getKthElementFromLast(1);
         System.out.println(kThElement);
         var knode = list2.getKthFromLast(-1);
         System.out.println(knode);
+        list2.fetchMiddle();
+
+        var list3 = list2.createWithLoop();
+        System.out.println(list3.containsLoop());
+
     }
 }

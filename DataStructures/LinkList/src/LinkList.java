@@ -220,4 +220,71 @@ public class LinkList {
         }
         System.out.print("]");
     }
+
+    /**
+     * |---------------------------------------------------------
+     * | Considering even number of elements in list
+     * | No. of nodes (1st pointer) Middle node (2nd pointer)
+     * | 2 1, 2
+     * | 4 2, 3
+     * | 6 3, 4
+     * | 8 4, 5
+     * | 10 5, 6
+     * |
+     * | For odd numbers of elements in list
+     * | No. of nodes (1st pointer) Middle node (2nd pointer)
+     * | 1 1
+     * | 3 2
+     * | 5 3
+     * | 7 4
+     * | 9 5
+     * | -> increment 1st pointer 2 & 2nd pointer 1 times in both cases
+     * |----------------------------------------------------------------
+     */
+
+    public void fetchMiddle() {
+        if (isEmpty())
+            throw new IllegalStateException();
+
+        var a = first;
+        var b = first;
+        while (b != null && b.next != null) {
+            a = a.next;
+            b = b.next.next;
+        }
+        if (b == null)
+            System.out.println(a.data + "," + " " + a.next.data);
+        if (b == last)
+            System.out.println(a.data);
+    }
+
+    public boolean containsLoop() {
+        var slow = first;
+        var fast = first;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            System.out.println(slow.data);
+            if (fast == slow)
+                return true;
+        }
+        return false;
+    }
+
+    public LinkList createWithLoop() {
+        var list = new LinkList();
+
+        list.addLast(10);
+        list.addLast(20);
+        list.addLast(30);
+
+        var node = list.last;
+
+        list.addLast(40);
+
+        list.last.next = node;
+
+        return list;
+    }
 }
