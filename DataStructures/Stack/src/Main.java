@@ -48,5 +48,36 @@ public class Main {
         System.out.println(stack2.toString());
         System.out.println(stack2.peek());
 
+        /**
+         * Two Stack inside single Array
+         */
+
+        TwoStack twoStack = new TwoStack(4);
+        twoStack.push1(4);
+        twoStack.push1(4);
+        twoStack.push1(4);
+        twoStack.push2(4);
+        System.out.println(twoStack.toString());
+
+        /**
+         * Minimum value from stack
+         */
+        MinimumStack minStack = new MinimumStack(10);
+        minStack.push(56);
+        minStack.push(32);
+        minStack.push(13);
+        minStack.push(21);
+        minStack.push(53);
+        minStack.push(68);
+        minStack.push(99);
+        minStack.push(65);
+        minStack.push(91);
+        minStack.push(10);
+        System.out.println(minStack.toString());
+        System.out.println(minStack.min());
+        System.out.println(minStack.pop());
+        System.out.println(minStack.min());
+        // System.out.println(minStack.toString());
+
     }
 }
