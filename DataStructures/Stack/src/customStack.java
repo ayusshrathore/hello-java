@@ -18,6 +18,10 @@ public class customStack {
         stack[++top] = item;
     }
 
+    public boolean isFull() {
+        return top == capacity - 1;
+    }
+
     public int pop() {
         if (isEmpty())
             throw new IllegalStateException();
