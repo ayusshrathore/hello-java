@@ -2,6 +2,13 @@ import java.io.*;
 import java.util.*;
 
 public class Solution {
+    
+    /**
+    * Rohit has chocolate weighing 1 to n. He wants to divide it into two equal
+    * weights without cutting any chocolate.
+    * 
+    * Is it possible for him to divide?
+    */
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
