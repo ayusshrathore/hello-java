@@ -63,7 +63,6 @@ public class ArrayProblems {
 		/**
 		 * find duplicate in an array of N+1 Integers
 		 */
-		duplicateItems(new int[] { 1, 2, 3, 6, 3, 6, 1 });
 	}
 
 	// array length - how much min + 1
@@ -286,18 +285,6 @@ public class ArrayProblems {
 
 		}
 		return jumps;
-	}
-
-	static void duplicateItems(int[] array) {
-		// {1, 2, 3, 6, 3, 6, 1}
-		for (int i = 0; i < array.length; i++) {
-			array[array[i] % array.length] += array.length;
-			System.out.println(array[i]);
-		}
-		// for (int i = 0; i < array.length; i++) {
-		// if (array[i] > array.length * 2)
-		// System.out.println(i);
-		// }
 	}
 
 }
