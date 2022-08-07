@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Solution {
@@ -31,14 +34,14 @@ public class Solution {
          * YES
          * |--------------------------------------------------
          */
-        Scanner sc = new Scanner(System.in);
-        int size = sc.nextInt();
-        int[] array = new int[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = i + 1;
-        }
-        canDivide(array);
-        sc.close();
+        // Scanner sc = new Scanner(System.in);
+        // int size = sc.nextInt();
+        // int[] array = new int[size];
+        // for (int i = 0; i < size; i++) {
+        // array[i] = i + 1;
+        // }
+        // canDivide(array);
+        // sc.close();
 
         /**
          * |--------------------------------------------------
@@ -81,19 +84,35 @@ public class Solution {
          * |--------------------------------------------------
          */
 
-        System.out.println(sQMatrixMaxDiff(new int[][] { { 1, 2, -1, -4, -20 },
-                { -8, -3, 4, 2, 1 }, { 3, 8, 6, 1, 3 }, { -4, -1, 1, 7, -6 }, { 0, -4, 10,
-                        -5, 1 } }));
-        System.out.println(sQMatrixMaxDiff(new int[][] { { 1, 2, -1, -4, -20 },
-                { -20, -3, 4, 2, 1 }, { 3, 8, 6, 1, 3 }, { -4, -1, 1, 7, -6 }, { 0, -4, 10,
-                        -5, 1 } }));
+        // System.out.println(sQMatrixMaxDiff(new int[][] { { 1, 2, -1, -4, -20 },
+        // { -8, -3, 4, 2, 1 }, { 3, 8, 6, 1, 3 }, { -4, -1, 1, 7, -6 }, { 0, -4, 10,
+        // -5, 1 } }));
+        // System.out.println(sQMatrixMaxDiff(new int[][] { { 1, 2, -1, -4, -20 },
+        // { -20, -3, 4, 2, 1 }, { 3, 8, 6, 1, 3 }, { -4, -1, 1, 7, -6 }, { 0, -4, 10,
+        // -5, 1 } }));
+
+        // Scanner sc = new Scanner(System.in);
+        // int size = sc.nextInt();
+        // int[] array = new int[size];
+        // for (int i = 0; i < size; i++)
+        // array[i] = sc.nextInt();
+
+        // sc.close();
+        // System.out.println(piggyBank(array));
+
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < size; i++)
+            list.add(i + 1);
+
+        sc.close();
+        destroyingBoxes(list, size);
 
     }
 
     static void canDivide(int[] array) {
-        int sum = 0;
-        for (int i = 0; i < array.length; i++)
-            sum = sum + array[i];
+        var sum = (double) array.length / 2 * (array[0] + array[array.length]);
 
         if (sum % 2 == 0)
             System.out.println("YES");
@@ -147,6 +166,37 @@ public class Solution {
 
         return tempMax - tempMin;
 
+    }
+
+    static long piggyBank(int[] array) {
+        long minAmount = 1;
+        int i = 0;
+        while (i < array.length && array[i] <= minAmount) {
+            minAmount += array[i];
+            i++;
+        }
+
+        return minAmount;
+    }
+
+    static void destroyingBoxes(ArrayList<Integer> list, int size) {
+        int count = 1;
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        while (list.size() != 0) {
+            for (int i = 0; i < list.size(); i++) {
+                if (count % 2 == 0) {
+                    var ele = list.get(i);
+                    System.out.print(ele + " ");
+                    list2.add(ele);
+                }
+                count++;
+            }
+            for (int i = 0; i < list.size(); i++)
+                if (list2.contains(list.get(i)))
+                    list.remove(i);
+            list2.clear();
+        }
     }
 
 }

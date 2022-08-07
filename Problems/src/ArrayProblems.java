@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -61,8 +62,51 @@ public class ArrayProblems {
 		System.out.println(minJumps(new int[] { 9, 8, 6, 7, 6, 2, 9, 8, 5, 3, 1 }));
 
 		/**
-		 * find duplicate in an array of N+1 Integers
+		 * find duplicate in an array of N-1 Integers in O(n) without using extra space
 		 */
+		duplicateIntegers(new int[] { 1, 2, 3, 6, 3, 6, 1 });
+
+		/**
+		 * Merge 2 sorted arrays without using Extra space.
+		 */
+		mergeTwoSortedArrays(new int[] { 1, 5, 9, 10, 15, 20 }, new int[] { 2, 3, 8, 13 });
+		mergeTwoSortedArrays(new int[] { 10 }, new int[] { 2, 3 });
+
+		/**
+		 * find all pairs on integer array whose sum is equal to given number
+		 */
+		printPairs(new int[] { 1, 5, 7, -1, 5 }, 6);
+
+		/**
+		 * Rearrange the array in alternating positive and negative items with O(1)
+		 * extra space
+		 */
+		alternateIntegers(new int[] { 1, 2, 3, -4, -1, 4 });
+		alternateIntegers(new int[] { -5, -2, 5, 2, 4, 7, 1, 8, 0, -8 });
+
+		/**
+		 * Find if there is any subarray with sum equal to 0
+		 */
+		System.out.println(subArrayWithZeroSum(new int[] { 4, 2, -3, 1, 6 }));
+		System.out.println(subArrayWithZeroSum(new int[] { 4, 2, 0, 1, 6 }));
+		System.out.println(subArrayWithZeroSum(new int[] { -3, 2, 3, 1, 6 }));
+
+		/**
+		 * find maximum product subarray
+		 */
+		System.out.println(largestSubArrayProduct(new int[] { 6, -3, -10, 0, 2 }));
+		System.out.println(largestSubArrayProduct(new int[] { -2, -40, 0, -2, -3 }));
+		System.out.println(largestSubArrayProduct(new int[] { -2, -3, 0, -2, -40, }));
+		System.out.println(largestSubArrayProduct(new int[] { 1, -2, -3, 0, 7, -8, -2 }));
+
+		/**
+		 * Find longest consecutive subsequence
+		 */
+		System.out.println(longestConsecutiveSubsequence(new int[] { 1, 9, 3, 10, 4,
+				20, 2 }));
+		System.out.println(longestConsecutiveSubsequence(new int[] { 36, 41, 56, 35, 44, 33, 34, 92, 43, 32, 42 }));
+		System.out.println(longestConsecutiveSubsequence(new int[] { 1, 4, 2, 2, 4,
+				1, 2 }));
 	}
 
 	// array length - how much min + 1
@@ -287,4 +331,140 @@ public class ArrayProblems {
 		return jumps;
 	}
 
+	static void duplicateIntegers(int[] array) {
+
+		// {1, 2, 3, 6, 3, 6, 1}
+
+		for (int i = 0; i < array.length; i++)
+			array[array[i] % array.length] = array[array[i] % array.length] + array.length;
+
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] >= array.length * 2)
+				System.out.print(i + " ");
+		}
+		System.out.println();
+	}
+
+	// 2 sorted array without using extra space
+	// 1 2 3 4 5 6 7
+	// 9 10 11 12 13
+	// Input: ar1[] = {1, 5, 9, 10, 15, 20};
+	// ar2[] = {2, 3, 8, 13};
+	static void mergeTwoSortedArrays(int[] array1, int[] array2) {
+		int length = array1[0] < array2[0] ? array1.length : array2.length;
+
+		for (int i = 0; i < length; i++) {
+			int j = 0;
+			if (i == array1.length || i == array2.length)
+				break;
+
+			if (array1[i] > array2[j]) {
+				int temp = array1[i];
+				array1[i] = array2[j];
+				array2[j] = temp;
+				Arrays.sort(array2);
+				j++;
+			}
+		}
+
+		for (int i = 0; i < array1.length; i++)
+			System.out.print(array1[i] + " ");
+
+		System.out.println();
+		for (int i = 0; i < array2.length; i++)
+			System.out.print(array2[i] + " ");
+		System.out.println();
+	}
+
+	static void printPairs(int[] array, int sum) {
+
+		for (int i = 0; i < array.length; i++)
+			for (int j = i + 1; j < array.length; j++)
+				if (array[i] + array[j] == sum)
+					System.out.println("(" + array[i] + ", " + array[j] + ")");
+
+	}
+
+	static void alternateIntegers(int[] array) {
+		// {1, 2, 3, -4, -1, 4}
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] >= 0 && i % 2 == 0) {
+				for (int j = i + 1; j < array.length; j++) {
+					if (array[j] < 0) {
+						int temp = array[i];
+						array[i] = array[j];
+						array[j] = temp;
+						break;
+					}
+				}
+			}
+			if (array[i] < 0 && i % 2 != 0)
+				for (int j = i + 1; j < array.length; j++) {
+					if (array[j] >= 0) {
+						int temp = array[i];
+						array[i] = array[j];
+						array[j] = temp;
+						break;
+					}
+				}
+		}
+
+		System.out.println(Arrays.toString(array));
+	}
+
+	static int largestSubArrayProduct(int array[]) {
+		int maxSoFar = Integer.MIN_VALUE;
+		int currentMax = 1;
+		// 6, -3, -10, 0, 2
+
+		for (int i = 0; i < array.length; i++) {
+			currentMax = currentMax * array[i];
+			currentMax = currentMax == 0 ? 1 : currentMax;
+			if (currentMax > maxSoFar)
+				maxSoFar = currentMax;
+		}
+
+		return maxSoFar;
+	}
+
+	static boolean subArrayWithZeroSum(int array[]) {
+		Set<Integer> set = new HashSet<>();
+		int sum = array[0];
+		set.add(sum);
+
+		// {4, 2, -3, 1, 6}
+
+		for (int i = 1; i < array.length; i++) {
+			sum += array[i];
+
+			if (sum == 0 || array[i] == 0 || set.contains(sum))
+				return true;
+
+			set.add(sum);
+		}
+
+		return false;
+	}
+
+	static int longestConsecutiveSubsequence(int[] array) {
+		int count = 1;
+		// 1 4 2 2 4 1 2
+		Arrays.sort(array);
+
+		int maxCount = Integer.MIN_VALUE;
+		for (int i = 0; i < array.length - 1; i++) {
+			if (array[i] == array[i + 1])
+				continue;
+
+			if (array[i] + 1 == array[i + 1])
+				count++;
+
+			if (array[i] + 1 != array[i + 1]) {
+				maxCount = maxCount > count ? maxCount : count;
+				count = 1;
+			}
+		}
+
+		return maxCount;
+	}
 }
