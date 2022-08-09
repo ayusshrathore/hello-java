@@ -1,5 +1,21 @@
 import java.util.Arrays;
 
+/**
+ * With implementing Priority Queues with Heap we can increase the insertion
+ * rate but removing a item is slowed down
+ * as in heap if we remove the root node and replace the last node with the root
+ * node we need to bubble it down till it reaches it's correct position, so in
+ * worst case it could be = length of the tree which is = O(log n)
+ * 
+ * Priority Queue with Heap
+ * Insertion: O(log n) as if (root < children) max value bubbles up, worst
+ * case -> upto entire tree length)*
+ * Deletion: O(log n)
+ * 
+ * Priority Queue with Array
+ * Insertion: O(n)
+ * Deletion: O(1) as we only reduce the size no actual removal
+ */
 public class PriorityQueues {
     private int size;
     private int[] Queues;
