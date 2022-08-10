@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class LinkedList {
+public class LinkedListProblems {
     public static class Node {
         int value;
         Node next;
@@ -67,9 +67,9 @@ public class LinkedList {
 
     void reverseInGroups(int k) {
         var current = first;
-        var result = new LinkedList();
+        var result = new LinkedListProblems();
         while (current != null) {
-            var temp = new LinkedList();
+            var temp = new LinkedListProblems();
             for (int i = 0; i < k; i++) {
                 if (current == null)
                     break;
