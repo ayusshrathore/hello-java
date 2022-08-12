@@ -63,4 +63,13 @@ public class MaxHeap {
     array[a] = array[b];
     array[b] = temp;
   }
+
+  public static boolean isMaxHeap(int[] array) {
+
+    for (int i = array.length - 1; i >= 0; i--)
+      if (array[i] > array[parent(i)])
+        return false;
+
+    return true;
+  }
 }
