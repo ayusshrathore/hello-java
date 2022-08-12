@@ -21,7 +21,7 @@ public class Heap {
 
   public int remove() {
     if (isEmpty())
-      throw new IllegalStateException("Array is empty");
+      throw new IllegalStateException("Heap is empty");
 
     var root = array[0];
     array[0] = array[--count];
