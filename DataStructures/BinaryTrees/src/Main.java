@@ -37,12 +37,51 @@ public class Main {
         tree3.insert(3);
         tree3.insert(34);
         tree3.insert(2);
-        tree3.swapRoot();
+        // tree3.swapRoot();
         System.out.println(tree3.isBinarySearchTree());
-
         System.out.println(tree.getNodesAtKDistance(2));
 
         tree.levelOrderTraversal();
 
+        /**
+         * 1- Implement a method to calculate the size of a binary tree.
+         */
+        System.out.println(tree.size());
+        System.out.println(tree2.size());
+        System.out.println(tree3.size());
+
+        /**
+         * 2- Implement a method to count the number of leaves in a binary tree.
+         */
+        System.out.println(tree.countLeaves());
+        System.out.println(tree2.countLeaves());
+        System.out.println(tree3.countLeaves());
+
+        /**
+         * 3- Implement a method to return the maximum value in a binary search
+         */
+        System.out.println(tree.maxBST());
+        System.out.println(tree2.max());
+        System.out.println(tree3.max());
+
+        /**
+         * 4- Implement a method to check for the existence of a value in a binary
+         * tree using recursion. Compare this method with the find() method. The
+         */
+        System.out.println(tree.contains(9));
+        System.out.println(tree2.contains(9));
+        System.out.println(tree3.contains(9));
+
+        /**
+         * 5- Implement a method to check to see if two values are siblings in a
+         */
+        System.out.println(tree3.areSiblings(12, 2));
+        System.out.println(tree3.getDepth(12));
+
+        /**
+         * 6- Implement a method to return the ancestors of a value in a
+         */
+        tree.getAncestors(8);
+        System.out.println();
     }
 }
