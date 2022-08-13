@@ -87,6 +87,9 @@ public class StringUtils {
     System.out.println(isStringPalindrome("abba"));
     System.out.println(isStringPalindrome("abcba"));
     System.out.println(isStringPalindrome("abca"));
+
+    containsAll("The four boxing wizard jumps over the quickly");
+    containsAll("The four boxing wizard starts over the quickly");
   }
 
   public static int findVowels(String str) {
@@ -301,5 +304,24 @@ public class StringUtils {
       if (array[left++] != array[right--])
         return false;
     }
+  }
+
+  public static void containsAll(String str) {
+    final int ALPHABETS = 26;
+    var alphabets = new int[ALPHABETS];
+    var missing = false;
+
+    str = str.toLowerCase().replaceAll(" ", "");
+    for (int i = 0; i < str.length(); i++)
+      alphabets[str.charAt(i) - 'a']++;
+
+    for (int i = 0; i < alphabets.length; i++)
+      if (alphabets[i] == 0) {
+        System.out.print((char) (i + 'a'));
+        missing = true;
+      }
+
+    if (missing == false)
+      System.out.println(0);
   }
 }

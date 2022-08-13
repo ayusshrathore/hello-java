@@ -100,14 +100,17 @@ public class Solution {
         // sc.close();
         // System.out.println(piggyBank(array));
 
-        Scanner sc = new Scanner(System.in);
-        int size = sc.nextInt();
-        ArrayList<Integer> list = new ArrayList<>();
-        for (int i = 0; i < size; i++)
-            list.add(i + 1);
+        // Scanner sc = new Scanner(System.in);
+        // int size = sc.nextInt();
+        // ArrayList<Integer> list = new ArrayList<>();
+        // for (int i = 0; i < size; i++)
+        // list.add(i + 1);
 
-        sc.close();
-        destroyingBoxes(list, size);
+        // sc.close();
+        // destroyingBoxes(list, size);
+
+        System.out.println(carRace(3, 4, 1));
+        System.out.println(carRace(5, 4, 1));
 
     }
 
@@ -199,4 +202,21 @@ public class Solution {
         }
     }
 
+    static int carRace(int n1, int n2, int x) {
+        int m1 = 0, m2 = 0, count = 0;
+        while (true) {
+            m1 = count == 0 ? m1 + n1 + x : m1 + n1;
+            m2 = m2 + n2;
+            count++;
+            if (m2 > m1)
+                break;
+
+            if (count == 2 && m2 < m1) {
+                System.out.println(-1);
+                return 0;
+            }
+        }
+
+        return count;
+    }
 }
