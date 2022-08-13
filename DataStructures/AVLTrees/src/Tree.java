@@ -16,6 +16,7 @@ public class Tree {
   }
 
   private AVLNode root;
+  private boolean isBalanced = true;
 
   public void insert(int value) {
     root = insert(root, value);
@@ -35,14 +36,33 @@ public class Tree {
     return root = detectRotations(root);
   }
 
+  public boolean isBalanced() {
+    return isBalanced;
+  }
+
+  public boolean isTreeBalanced() {
+    return isTreeBalanced(root);
+  }
+
+  private boolean isTreeBalanced(AVLNode root) {
+    if (root == null)
+      return true;
+
+    return Math.abs(balanceFactor(root)) <= 1 &&
+        isTreeBalanced(root.leftChild) &&
+        isTreeBalanced(root.rightChild);
+  }
+
   private AVLNode detectRotations(AVLNode root) {
 
     if (isLeftHeavy(root)) {
+      isBalanced = false;
       if (balanceFactor(root.leftChild) < 0)
         // attach newRoot to the left of the root
         root.leftChild = leftRotation(root.leftChild);
       return rightRotation(root);
     } else if (isRightHeavy(root)) {
+      isBalanced = false;
       if (balanceFactor(root.rightChild) > 0)
         // attach newRoot to the right of the root
         root.rightChild = rightRotation(root.rightChild);
