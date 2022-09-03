@@ -20,30 +20,30 @@ public class Array {
         array[count++] = value;
     }
 
+    // O(n)
     private void resizeIfRequired() {
         if (count == array.length) {
             int[] newArray = new int[count * 2];
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
                 newArray[i] = array[i];
-            }
             array = newArray;
         }
     }
 
+    // O(n)
     public void removeAt(int index) {
         if (index < 0 || index >= count)
             throw new IndexOutOfBoundsException();
-        for (int i = index; i < count - 1; i++) {
+        for (int i = index; i < count - 1; i++)
             array[i] = array[i + 1];
-        }
         count--;
     }
 
+    // O(n)
     public int indexOf(int num) {
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < array.length; i++)
             if (array[i] == num)
                 return i;
-        }
         return -1;
 
     }
