@@ -90,6 +90,8 @@ public class Main {
         // that they add up to a specific target.
         var result = twoSum(new int[] { 2, 7, 11, 15 }, 9);
         System.out.println(Arrays.toString(result));
+        System.out.println(twoSum(new int[] { 2, 3, 4 }, 6));
+        System.out.println("hello");
         scanner.close();
 
         // Build a hash table from scratch. Use linear probing strategy for
@@ -212,21 +214,6 @@ public class Main {
 
     // Runtime complexity: O(n)
     static int[] twoSum(int[] numbers, int target) {
-        Set<Integer> set = new HashSet<>();
-
-        int[] indices = new int[2];
-        for (int i = 0; i < numbers.length; i++) {
-            if (set.contains(target - numbers[i]) && i < indices.length)
-                indices[i] = i;
-
-            set.add(numbers[i]);
-        }
-
-        return indices;
-    }
-
-    // Runtime complexity: O(n)
-    static int[] getTwoSum(int[] numbers, int target) {
         Map<Integer, Integer> map = new HashMap<>();
 
         for (int i = 0; i < numbers.length; i++) {

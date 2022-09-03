@@ -67,12 +67,13 @@ public class HashTables {
 		if (list.isEmpty())
 			throw new IllegalArgumentException("INVALID KEY");
 
-		for (var ele : list) {
+		for (var ele : list)
 			if (ele.key == key) {
 				list.remove(ele);
 				count--;
+				return;
 			}
-		}
+		throw new IllegalArgumentException("INVALID KEY");
 	}
 
 	private int hash(int number) {
