@@ -22,7 +22,7 @@ public class Point {
         return this.x == point.x && this.y == point.y;
     }
 
-    // evertime overriding equals() method, we need to override hashCode() method
+    // everytime overriding equals() method, we need to override hashCode() method
     @Override
     public int hashCode() {
         // generating hashcode on basis of content of the object

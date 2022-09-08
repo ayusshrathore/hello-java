@@ -13,7 +13,7 @@ public class TextBox extends UIControl { // to inherit fields & methods from UIC
         System.out.println("Render TextBox");
     }
 
-    @Override // annotation (label attached with class memebers) to give extra info to
+    @Override // annotation (label attached with class members) to give extra info to
     // compiler i.e overiding the method
     public String toString() {
         return text;
