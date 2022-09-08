@@ -9,7 +9,7 @@ public class MaxHeap {
       heapify(array, i);
 
     return Arrays.toString(array);
-
+    // 5 4 2 1 3
   }
 
   public static int getKthLargestItem(int[] array, int k) {
