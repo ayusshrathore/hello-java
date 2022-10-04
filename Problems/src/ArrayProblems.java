@@ -1,7 +1,13 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ArrayProblems {
 
@@ -107,6 +113,264 @@ public class ArrayProblems {
 		System.out.println(longestConsecutiveSubsequence(new int[] { 36, 41, 56, 35, 44, 33, 34, 92, 43, 32, 42 }));
 		System.out.println(longestConsecutiveSubsequence(new int[] { 1, 4, 2, 2, 4,
 				1, 2 }));
+
+		// Q1
+		// holes [4,8]
+		// bob = 3 step forward, 4 step backward, target=10
+		// [0,3,6,9,12,15,11,14,10]
+
+		// Q2
+		// n=4 [1, 2, 3, 4], divide into k parts & find out each permutation
+
+		/**
+		 * All Permutations of array
+		 */
+		System.out.println(permutations(0, new int[] { 1, 2, 3 }, new ArrayList<ArrayList<Integer>>()));
+
+		/**
+		 * NextPermutation
+		 */
+		System.out.println(nextPermutation(new int[] { 1, 3, 5, 4, 2 }));
+		System.out.println(nextPermutation(new int[] { 5, 4, 3, 2, 1 }));
+		System.out.println(nextPermutation(new int[] { 1, 3, 2 }));
+
+		/**
+		 * Merge Intervals
+		 */
+		System.out.println(Arrays.deepToString(
+				mergeIntervals(new int[][] { { 1, 3 }, { 2, 6 }, { 8, 10 }, { 15, 18 } })));
+		System.out.println(Arrays.deepToString(
+				mergeIntervals(new int[][] { { 1, 4 }, { 0, 0 } })));
+		System.out.println(Arrays.deepToString(
+				mergeIntervals(new int[][] { { 6, 8 }, { 1, 9 }, { 2, 4 }, { 4, 7 } })));
+
+		/**
+		 * Buy or sell stocks
+		 */
+		System.out.println(buySellStock(new int[] { 100, 180, 260, 310, 40, 535, 695 }));
+
+		/**
+		 * Trapping Rain Water Problem
+		 */
+		System.out.println(trappingRainWater(new int[] { 3, 0, 2, 0, 4 }));
+		System.out.println(trappingRainWater(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 }));
+
+		/**
+		 * Chocolate Distribution
+		 */
+		System.out.println(chocolateDistribution(new int[] { 7, 3, 2, 4, 9, 12, 56 }, 3));
+		System.out.println(chocolateDistribution(new int[] { 3, 4, 1, 9, 56, 7, 9, 12 }, 5));
+		System.out.println(
+				chocolateDistribution(new int[] { 12, 4, 7, 9, 2, 23, 25, 41, 30, 40, 28, 42, 30, 44, 48, 43, 50 }, 7));
+
+		/**
+		 * Pascal's Triangle
+		 */
+		System.out.println(pascalsTriangle(4));
+
+		/**
+		 * Four Sum
+		 */
+		System.out.println(fourSum(new int[] { 1, 0, -1, 0, -2, 2 }, 0));
+		System.out.println(fourSum(new int[] { 2, 2, 2, 2, 2 }, 8));
+		System.out.println(fourSum(new int[] { 1000000000, 1000000000, 1000000000, 1000000000 }, -294967296));
+		System.out.println(fourSum(new int[] { -1, 0, 1, 2, -1, -4 }, -1));
+
+		/**
+		 * Remove Duplicates from Sorted Array
+		 */
+		System.out.println(removeDuplicates(new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 }));
+		System.out.println(removeDuplicates(new int[] { 1, 2 }));
+
+		/**
+		 * Three Sum
+		 */
+		// System.out.println(threeSum(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		// -1, -1, -1 }));
+		System.out.println(threeSum(new int[] { 0, 0, 0, 0 }));
+
+		/**
+		 * Minimum Number of coins
+		 */
 	}
 
 	// array length - how much min + 1
@@ -265,7 +529,6 @@ public class ArrayProblems {
 			array[i] = array[i - 1];
 		}
 		array[0] = last;
-
 		System.out.println(Arrays.toString(array));
 	}
 
@@ -466,5 +729,345 @@ public class ArrayProblems {
 		}
 
 		return maxCount;
+	}
+
+	static ArrayList<ArrayList<Integer>> permutations(int index, int[] nums,
+			ArrayList<ArrayList<Integer>> ans) {
+		if (index == nums.length) {
+
+			ArrayList<Integer> ds = new ArrayList<>();
+			for (var num : nums)
+				ds.add(num);
+			ans.add(ds);
+
+			return ans;
+		}
+
+		for (int i = index; i < nums.length; i++) {
+			swap(i, index, nums);
+			permutations(index + 1, nums, ans);
+			// backtracking
+			swap(i, index, nums);
+		}
+		return ans;
+	}
+
+	static String nextPermutation(int[] nums) {
+		// 1 3 5 4 2
+		// 1 3 2
+		if (nums == null || nums.length <= 1)
+			return nums.toString();
+
+		int index1 = -1, index2 = 0;
+		for (int i = nums.length - 1; i > 0; i--)
+			if (nums[i] > nums[i - 1]) {
+				index1 = i - 1;
+				break;
+			}
+		if (index1 >= 0)
+			for (int i = nums.length - 1; i > 0; i--)
+				if (nums[i] > nums[index1]) {
+					index2 = i;
+					swap(index1, index2, nums);
+					break;
+				}
+		reverse(index1 + 1, nums.length - 1, nums);
+
+		return Arrays.toString(nums);
+	}
+
+	static int[][] mergeIntervals(int[][] intervals) {
+		List<int[]> mergedIntervals = new ArrayList<>();
+		if (intervals == null || intervals.length < 1)
+			return mergedIntervals.toArray(new int[0][]);
+
+		Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+		int start = intervals[0][0], end = intervals[0][1];
+
+		for (int[] it : intervals) {
+			if (it[0] <= end)
+				end = Math.max(it[1], end);
+			else {
+				mergedIntervals.add(new int[] { start, end });
+				// updating values of start & end as intervals changes
+				start = it[0];
+				end = it[1];
+			}
+		}
+
+		mergedIntervals.add(new int[] { start, end });
+		return mergedIntervals.toArray(new int[0][]);
+	}
+
+	static int buySellStock(int[] prices) {
+		if (prices == null || prices.length == 0)
+			return 0;
+		int maxProfit = 0, minAmount = Integer.MAX_VALUE;
+
+		for (int i = 0; i < prices.length; i++) {
+			minAmount = Math.min(prices[i], minAmount);
+			maxProfit = Math.max(maxProfit, prices[i] - minAmount);
+		}
+		return maxProfit;
+	}
+
+	static int trappingRainWater(int[] elevations) {
+		int minHeights = 0;
+		int totalWater = 0;
+		if (elevations == null | elevations.length == 0)
+			return totalWater;
+
+		int[] left = new int[elevations.length], right = new int[elevations.length];
+
+		// store max heights from the left
+		left[0] = elevations[0];
+		for (int i = 1; i < elevations.length; i++)
+			left[i] = Math.max(left[i - 1], elevations[i]);
+
+		// store max heights from the right
+		right[elevations.length - 1] = elevations[elevations.length - 1];
+		for (int i = elevations.length - 2; i >= 0; i--)
+			right[i] = Math.max(right[i + 1], elevations[i]);
+
+		for (int i = 0; i < elevations.length; i++) {
+			minHeights = Math.min(left[i], right[i]);
+			totalWater += (minHeights - elevations[i] > 0 ? minHeights - elevations[i] : 0);
+		}
+
+		return totalWater;
+	}
+
+	static int chocolateDistribution(int[] chocolates, int m) {
+		if (chocolates == null || chocolates.length == 0)
+			return 0;
+
+		int diff = 0, lowestDiff = Integer.MAX_VALUE;
+		Arrays.sort(chocolates);
+		for (int i = 0; i < chocolates.length; i++) {
+			if (chocolates.length - i >= m) {
+				diff = chocolates[m - 1 + i] - chocolates[i];
+				lowestDiff = Math.min(diff, lowestDiff);
+			}
+		}
+		return lowestDiff;
+	}
+
+	static List<List<Integer>> pascalsTriangle(int numRows) {
+		List<List<Integer>> result = new ArrayList<>();
+
+		List<Integer> pre = null;
+		for (int i = 0; i < numRows; i++) {
+			List<Integer> row = new ArrayList<>();
+			for (int j = 0; j <= i; j++) {
+				if (j == 0 || j == i)
+					row.add(1);
+				else
+					row.add(pre.get(j) + pre.get(j - 1));
+			}
+			pre = row;
+			result.add(row);
+		}
+		return result;
+
+	}
+
+	static List<List<Integer>> fourSum(int[] nums, int target) {
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		if (nums == null || nums.length == 0)
+			return result;
+
+		int n = nums.length;
+		// [-2,-1,0,0,1,2]
+		Arrays.sort(nums);
+		for (int i = 0; i < n - 3; i++) {
+			for (int j = i + 1; j < n - 2; j++) {
+				long target2 = target - (nums[i] + nums[j]);
+
+				var left = j + 1;
+				var right = n - 1;
+
+				while (left < right) {
+					if (target2 < nums[left] + nums[right])
+						right--;
+					else if (target2 > nums[left] + nums[right])
+						left++;
+					else {
+						List<Integer> quads = new ArrayList<>();
+						quads.add(nums[i]);
+						quads.add(nums[j]);
+						quads.add(nums[left]);
+						quads.add(nums[right]);
+						result.add(quads);
+
+						// removing duplicates for left & right pointers
+						while (left < right && nums[left] == quads.get(2))
+							++left;
+
+						while (left < right && nums[right] == quads.get(3))
+							--right;
+					}
+				}
+				while (j + 1 < n - 2 && nums[j] == nums[j + 1])
+					++j;
+			}
+			while (i + 1 < n - 3 && nums[i] == nums[i + 1])
+				++i;
+		}
+		return result;
+	}
+
+	static int removeDuplicates(int[] nums) {
+		if (nums == null || nums.length == 0) {
+			return 0;
+		}
+
+		for (int i = 0; i < nums.length - 1; i++) {
+			int j = i + 1;
+			if (nums[j] <= nums[i]) {
+				for (int k = j + 1; k < nums.length; k++)
+					if (nums[k] > nums[i]) {
+						swap(k, j, nums);
+						break;
+					}
+			}
+		}
+		int count = 1;
+		for (int i = 0; i < nums.length - 1; i++) {
+			if (nums[i] < nums[i + 1])
+				count++;
+			else
+				break;
+		}
+		return count;
+	}
+
+	// static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+	// if (nums1 == null && nums2 == null)
+	// return 0;
+
+	// int size1 = nums1.length - 1;
+	// int size2 = nums2.length - 1;
+	// double larger = 0;
+	// double result = 0;
+
+	// if (nums1[size1] > nums2[size2])
+	// larger = nums1[size1];
+	// else
+	// larger = nums2[size2];
+
+	// if (larger % 2 == 0) {
+	// double n1 = larger / 2;
+	// double n2 = (larger / 2) + 1;
+	// double n = n1 + n2;
+	// result = n / 2;
+	// } else
+	// result = Math.ceil(larger / 2);
+
+	// return result;
+	// }
+
+	// static List<List<Integer>> threeSum(int[] nums) {
+	// List<List<Integer>> result = new ArrayList<List<Integer>>();
+	// if (nums == null || nums.length == 0)
+	// return result;
+
+	// if (nums.length >= 3 && nums.length < 3000 && IntStream.of(nums).sum() == 0)
+	// {
+	// ArrayList<Integer> numList = new ArrayList<>();
+	// int count = 0;
+	// for (int i = 0; i < 3; i++)
+	// if (nums[i] == 0)
+	// count++;
+
+	// if (count == 3) {
+	// numList.add(0);
+	// numList.add(0);
+	// numList.add(0);
+	// result.add(numList);
+	// return result;
+	// }
+	// }
+
+	// int n = nums.length;
+	// int target = 0;
+	// Arrays.sort(nums);
+	// for (int i = 0; i < n - 2; i++) {
+	// var target2 = target - (nums[i]);
+
+	// var left = i + 1;
+	// var right = n - 1;
+
+	// while (left < right) {
+	// if (target2 < nums[left] + nums[right])
+	// right--;
+	// else if (target2 > nums[left] + nums[right])
+	// left++;
+	// else {
+	// List<Integer> trips = new ArrayList<>();
+	// trips.add(nums[i]);
+	// trips.add(nums[left]);
+	// trips.add(nums[right]);
+	// result.add(trips);
+
+	// while (left < right && nums[left] == trips.get(1))
+	// ++left;
+
+	// while (left < right && nums[right] == trips.get(2))
+	// --right;
+	// }
+	// }
+	// while (i + 1 < n - 2 && nums[i] == nums[i + 1])
+	// ++i;
+	// }
+	// return result;
+	// }
+	static List<List<Integer>> threeSum(int[] nums) {
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		if (nums == null || nums.length == 0)
+			return result;
+
+		int n = nums.length;
+
+		Arrays.sort(nums);
+		for (int i = 0; i < n - 2; i++) {
+			var sum = 0 - nums[i];
+
+			var left = i + 1;
+			var right = n - 1;
+
+			while (left < right) {
+				if (sum < nums[left] + nums[right])
+					right--;
+				else if (sum > nums[left] + nums[right])
+					left++;
+				else {
+					List<Integer> trips = new ArrayList<>();
+					trips.add(nums[i]);
+					trips.add(nums[left]);
+					trips.add(nums[right]);
+					result.add(trips);
+
+					while (left < right && nums[left] == trips.get(1))
+						++left;
+
+					while (left < right && nums[right] == trips.get(2))
+						--right;
+				}
+			}
+			while (i < n - 2 && nums[i] == nums[i + 1])
+				++i;
+		}
+		return result;
+	}
+
+	static void reverse(int startingIndex, int lastIndex, int[] array) {
+		while (startingIndex < lastIndex)
+			swap(startingIndex++, lastIndex--, array);
+	}
+
+	static void swap(int a, int b, int[] array) {
+		int temp = array[a];
+		array[a] = array[b];
+		array[b] = temp;
 	}
 }
