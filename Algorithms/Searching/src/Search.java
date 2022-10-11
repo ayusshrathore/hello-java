@@ -28,24 +28,6 @@ public class Search {
     return partitionArray(left, right, item);
   }
 
-  private int partitionArray(int left, int right, int item) {
-
-    int mid = (left + right) / 2;
-    int index = -1;
-
-    if (left > right)
-      return index;
-
-    if (array[mid] == item)
-      return index = mid;
-
-    if (array[mid] < item)
-      return partitionArray(mid + 1, right, item);
-
-    return partitionArray(left, mid - 1, item);
-
-  }
-
   public int iterativeBinarySearch(int item) {
     int left = 0;
     int right = size - 1;
@@ -68,6 +50,7 @@ public class Search {
   }
 
   public int ternarySearch(int item) {
+    Arrays.sort(array);
     return ternarySearch(0, size - 1, item);
   }
 
@@ -95,21 +78,22 @@ public class Search {
   }
 
   public int jumpSearch(int item) {
-    int blockSize = (int) Math.sqrt(size);
+    int blockSize = (int) Math.sqrt(array.length);
     int start = 0;
     int next = blockSize;
 
-    while (start < size && array[next - 1] < item) {
-      if (next > size)
-        next = size;
-
+    while (start < array.length &&
+        array[next - 1] < item) {
       start = next;
       next += blockSize;
+      if (next > array.length)
+        next = array.length;
     }
 
-    for (int i = start; i < next; i++)
+    for (var i = start; i < next; i++)
       if (array[i] == item)
         return i;
+
     return -1;
   }
 
@@ -121,6 +105,25 @@ public class Search {
 
     int left = bound / 2;
     int right = Math.min(bound, size - 1);
+
     return partitionArray(left, right, item);
+  }
+
+  // ================== utility method ======================
+  private int partitionArray(int left, int right, int item) {
+
+    int mid = (left + right) / 2;
+
+    if (left > right)
+      return -1;
+
+    if (array[mid] == item)
+      return mid;
+
+    if (array[mid] < item)
+      return partitionArray(mid + 1, right, item);
+
+    return partitionArray(left, mid - 1, item);
+
   }
 }
