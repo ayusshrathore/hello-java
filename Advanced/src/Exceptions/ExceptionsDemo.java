@@ -7,12 +7,8 @@ import java.io.IOException;
 
 public class ExceptionsDemo {
     public  static void show(){
-        // try with resources
-        try (
-                FileReader reader = new FileReader("file.txt");
-                var writer = new FileWriter("file2.txt");
-        ) {
-            var value = reader.read();
+        try {
+            Account.deposit(-1);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
