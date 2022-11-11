@@ -14,11 +14,9 @@ public class Account {
         if(value <=0) throw new IOException();
     }
     public void withdraw(float value) throws AccountException {
-        if (value > balance) {
-            var fundsException = new InsufficientFundsException();
-            var accountException =  new AccountException();
-            accountException.initCause(fundsException);
-            throw accountException;
-        }
+        // wrap inside a more general exception
+        if (value > balance)
+            throw new AccountException(new InsufficientFundsException());
+
     }
 }
