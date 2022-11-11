@@ -6,11 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ExceptionsDemo {
-    public  static void show(){
+    public  static void show() throws IOException {
         try {
             Account.deposit(-1);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Logging");
+            throw e;
         }
     }
 
