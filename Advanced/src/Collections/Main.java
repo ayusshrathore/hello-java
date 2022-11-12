@@ -35,5 +35,7 @@ public class Main {
         Collections.sort(customers, new EmailComparator());
         System.out.println(customers);
 
+        // Queue interface
+        QueueDemo.show();
     }
 }
