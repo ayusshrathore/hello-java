@@ -37,5 +37,8 @@ public class Main {
 
         // Queue interface
         QueueDemo.show();
+
+        // Set interface
+        SetDemo.show();
     }
 }
