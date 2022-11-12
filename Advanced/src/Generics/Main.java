@@ -42,6 +42,12 @@ public class Main {
         User user2 = new User(10);
         if(user1.compareTo(user2) == 0) System.out.println("Both have equal points");
         if(user1.compareTo(user2) < 0) System.out.println("User1 have less points than User2");
-        else System.out.println("User1 have more points than User 2");
+        else System.out.println("User1 have more points than User2");
+
+        // Working with generic methods
+        int max = Utils.max(1, 2);
+        System.out.println(max);
+        User user = Utils.max(new User(10), new User(20));
+        System.out.println(user);
     }
 }
