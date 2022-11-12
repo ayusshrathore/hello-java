@@ -49,5 +49,10 @@ public class Main {
         System.out.println(max);
         User user = Utils.max(new User(10), new User(20));
         System.out.println(user);
+
+        // Multiple type parameters like key, value pairs
+        Utils.print(1, "One");
+        var keyValue = new KeyValuePair("One", 1);
+        System.out.println(keyValue);
     }
 }
