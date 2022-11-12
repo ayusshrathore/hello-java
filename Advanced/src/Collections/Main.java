@@ -40,5 +40,8 @@ public class Main {
 
         // Set interface
         SetDemo.show();
+
+        // Map interface
+        MapDemo.show();
     }
 }
