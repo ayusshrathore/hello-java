@@ -13,7 +13,19 @@ public class Utils {
         System.out.println(user);
     }
 
-    public static void printUsers(GenericList<User> users){
+    // wildcard "?" : represents unknown type while using these type java compiler will create
+    // an anonymous type under the hood as  -> CAP#1 extends User{}, 1 represents number of wildcards also if we
+    // use get method there we can only store the result inside a variable of CAP class or it's base class
+    // i.e. Object class
 
+    // In order to read from the list we should use GenericList<? extends User>
+    // & in order to write to the list we should use GenericList<? super User> to imitate as Object class
+    // which is the parent of User class
+    public static void printUsers(GenericList<? super User> users){
+        // User x = users.get(0); throws error as java compiler doesn't known as the object we are getting
+        // is compatible with the User it could be string obj or a datetime obj etc...
+        users.add(new Instructor(10));
+        users.add(new User(20));
+        Object x = users.get(0);
     }
 }

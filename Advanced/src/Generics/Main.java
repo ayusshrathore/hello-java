@@ -64,6 +64,8 @@ public class Main {
         // var users = new GenericList<Instructor>();
         // Utils.printUsers(users);
 
+        // Wildcards
+        // In order o solve the above issue we're gonna use wildcards
 
     }
 }
