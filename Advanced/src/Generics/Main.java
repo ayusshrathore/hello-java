@@ -21,5 +21,17 @@ public class Main {
         var list2 = new GenericList<Integer>();
         list2.add(1);
         list2.get(0);
+
+
+        // Also as discussed earlier we can't just store the primitive types inside a generic class as
+        // new GenericList<int> instead we need the wrapper class around primitive ones
+        // Some wrapper classes around primitive ones
+        // int -> Integer (reference type)
+        // float -> Float (reference type)
+        // Boolean -> Boolean (reference type)
+        GenericList<Integer> numbers = new GenericList<>();
+        numbers.add(1); // here we can directly pass a primitive as java compiler itself converts in into an instance
+        // of Integer class internally this is termed as boxing as java compiler will put this value inside a box
+        int num1 = numbers.get(0); // get the value of instance of Integer class (Unboxing)
     }
 }
