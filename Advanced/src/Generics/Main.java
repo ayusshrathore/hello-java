@@ -10,7 +10,7 @@ public class Main {
         // to even Float, Boolean, Double, Character .... etc
         list.add(1);
         list.add("1");
-        list.add(new User());
+        list.add(new User(1));
 
         // Below code will generate a runtime error (this is the problem with this type of implementation)
         // Instead of using Object type we should make use of generics
@@ -36,5 +36,12 @@ public class Main {
 
         // Constraints
         // new GenericList<String>(); compilation error as GenericList<> class now Inherits from Number class
+
+        // Implementing comparable interface
+        User user1 = new User(20);
+        User user2 = new User(10);
+        if(user1.compareTo(user2) == 0) System.out.println("Both have equal points");
+        if(user1.compareTo(user2) < 0) System.out.println("User1 have less points than User2");
+        else System.out.println("User1 have more points than User 2");
     }
 }

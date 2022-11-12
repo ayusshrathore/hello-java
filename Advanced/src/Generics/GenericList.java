@@ -4,7 +4,7 @@ package Generics;
 // we use that when we want a class to act as a collection
 
 // Adding constraints
-public class GenericList<T extends Number> { // T can only be a Number class or any of its derivatives
+public class GenericList<T> { // T can only be a Number class or any of its derivatives
     private T[] items = (T[]) new Object[10];
     private  int count;
 
