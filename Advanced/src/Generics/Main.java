@@ -54,5 +54,16 @@ public class Main {
         Utils.print(1, "One");
         var keyValue = new KeyValuePair("One", 1);
         System.out.println(keyValue);
+
+        // Inheritance with generics
+        User instructor = new Instructor(10);
+        Utils.printUser(new Instructor(10));
+        // We get compilation error as generic list of Instructor is not a subtype of generic
+        // list of user as we know this generic list internally maintain a list of objects no matter
+        // what we pass we have a single generic list in the project and it's not the sub type of itself
+        // var users = new GenericList<Instructor>();
+        // Utils.printUsers(users);
+
+
     }
 }
