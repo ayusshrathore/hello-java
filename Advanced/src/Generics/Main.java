@@ -33,5 +33,8 @@ public class Main {
         numbers.add(1); // here we can directly pass a primitive as java compiler itself converts in into an instance
         // of Integer class internally this is termed as boxing as java compiler will put this value inside a box
         int num1 = numbers.get(0); // get the value of instance of Integer class (Unboxing)
+
+        // Constraints
+        // new GenericList<String>(); compilation error as GenericList<> class now Inherits from Number class
     }
 }
