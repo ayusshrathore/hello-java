@@ -2,6 +2,7 @@ package Lambdas;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class LambdasDemo {
     public String suffix = ".";
@@ -69,6 +70,16 @@ public class LambdasDemo {
         Consumer<String> print = item -> System.out.println(item);
         Consumer<String> printUpperCase = item -> System.out.println(item.toUpperCase());
         list1.forEach(print.andThen(printUpperCase));
+
+        // Supplier interface
+        Supplier<Double> getRandom = () -> Math.random();
+        var random = getRandom.get(); // this getRandom method do not get executed until we explicitly call this method
+        // this is termed as lazy evaluation
+        System.out.println(random);
+        // Also Supplier interface do have some specializations in order to work with primitives such as
+        // DoubleSupplier
+        // BooleanSupplier, etc...
+        // with these we don't really need to sacrifice for the cost of autoBoxing
     }
     public LambdasDemo(){};
     public LambdasDemo(String message){
