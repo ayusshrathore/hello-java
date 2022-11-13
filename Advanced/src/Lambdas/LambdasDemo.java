@@ -2,6 +2,7 @@ package Lambdas;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class LambdasDemo {
@@ -80,6 +81,12 @@ public class LambdasDemo {
         // DoubleSupplier
         // BooleanSupplier, etc...
         // with these we don't really need to sacrifice for the cost of autoBoxing
+
+
+        // Function interface
+        Function<String, Integer> map = str -> str.length();
+        var len = map.apply("sky");
+        System.out.println(len);
     }
     public LambdasDemo(){};
     public LambdasDemo(String message){
