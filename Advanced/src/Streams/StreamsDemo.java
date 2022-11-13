@@ -11,10 +11,10 @@ public class StreamsDemo {
     public static void show() {
         // Functional vs Imperative Programming
         List<Movie> movies = List.of(
-                new Movie("a", 10),
-                new Movie("a", 10),
-                new Movie("b", 20),
-                new Movie("c", 30)
+                new Movie("a", 10, Genre.ACTION),
+                new Movie("a", 10, Genre.ACTION),
+                new Movie("b", 20, Genre.THRILLER),
+                new Movie("c", 30, Genre.COMEDY)
         );
         // Imperative programming, in which statements specify how something need to be done
         int count = 0;
@@ -120,25 +120,47 @@ public class StreamsDemo {
         System.out.println(sum1);
 
         // Collectors
-       var result = movies.stream().filter(movie -> movie.getLikes() > 10).collect(Collectors.toList());
-       var result1 = movies.stream().filter(movie -> movie.getLikes() > 10).collect(Collectors.toSet());
+        var result = movies.stream().filter(movie -> movie.getLikes() > 10).collect(Collectors.toList());
+        var result1 = movies.stream().filter(movie -> movie.getLikes() > 10).collect(Collectors.toSet());
 
-       // Title (key), Likes(value)
-       var result2 = movies.stream().filter(movie -> movie.getLikes() > 10).collect(Collectors.
+        // Title (key), Likes(value)
+        var result2 = movies.stream().filter(movie -> movie.getLikes() > 10).collect(Collectors.
                toMap(Movie::getTitle, Movie::getLikes));
 
-       var sumOfLikes = movies.stream().filter(movie ->  movie.getLikes() > 10)
+        var sumOfLikes = movies.stream().filter(movie ->  movie.getLikes() > 10)
                        .collect(Collectors.summingInt(Movie::getLikes));
-       System.out.println(sumOfLikes);
+        System.out.println(sumOfLikes);
 
-     var summary = movies.stream().filter(movie ->  movie.getLikes() > 10)
+        var summary = movies.stream().filter(movie ->  movie.getLikes() > 10)
              .collect(Collectors.summarizingInt(Movie::getLikes));
-     System.out.println(summary);
+        System.out.println(summary);
 
-     // joining
-     var mapLikesWithTitle = movies.stream().filter(movie ->  movie.getLikes() > 10).map(Movie::getTitle)
+        // joining
+        var mapLikesWithTitle = movies.stream().filter(movie ->  movie.getLikes() > 10).map(Movie::getTitle)
              .collect(Collectors.joining(", "));
-     System.out.println(mapLikesWithTitle);
+        System.out.println(mapLikesWithTitle);
+
+       // Grouping or classifying data
+        var moviesByGenre = movies.stream().
+            collect(Collectors.groupingBy(Movie::getGenre));
+        System.out.println(moviesByGenre);
+
+        // storing movies by genre inside a set
+        var byGenre = movies.stream().
+                collect(Collectors.groupingBy(Movie::getGenre, Collectors.toSet()));
+        System.out.println(byGenre);
+
+        // counting number of movies in each category
+        var countByGenre = movies.stream().
+                collect(Collectors.groupingBy(Movie::getGenre, Collectors.counting()));
+        System.out.println(countByGenre);
+
+        // joining names of movies
+        var result3 = movies.stream().
+                collect(Collectors.groupingBy(Movie::getGenre,
+                        Collectors.mapping(Movie::getTitle, Collectors.joining(", ")))); //since joining only works on stream
+        // of strings so first mapping it with stream of strings & then applying Collectors.joining in order to join
+        System.out.println(result3);
     }
 
 }
