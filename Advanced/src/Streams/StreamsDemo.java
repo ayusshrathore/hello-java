@@ -161,6 +161,14 @@ public class StreamsDemo {
                         Collectors.mapping(Movie::getTitle, Collectors.joining(", ")))); //since joining only works on stream
         // of strings so first mapping it with stream of strings & then applying Collectors.joining in order to join
         System.out.println(result3);
+
+        // Partitioning data
+        var partitioned = movies.stream().collect(Collectors.partitioningBy(m -> m.getLikes() > 20));
+        // joining partitioned movies
+        var result4 = movies
+                .stream().collect(Collectors.partitioningBy(m -> m.getLikes() > 20, Collectors
+                        .mapping(Movie::getTitle, Collectors.joining(", "))));
+     System.out.println(result4);
     }
 
 }
