@@ -87,6 +87,24 @@ public class LambdasDemo {
         Function<String, Integer> map = str -> str.length();
         var len = map.apply("sky");
         System.out.println(len);
+
+        // Composing functions -> combining smaller functions to build large and complex functions
+        // "key:value"
+        // "key=value" // first transformation
+        // "{key=value}" // second transformation
+        Function<String, String> replaceColon = str -> str.replace(":", "=");
+        Function<String, String> addBraces = str -> "{" + str + "}";
+
+        // 2 Ways of composing functions, e.g. of declarative programming
+        // 1:
+        var result = replaceColon.
+                    andThen(addBraces).
+                    apply("key:value");
+        System.out.println(result);
+        // 2:
+        var result1 = addBraces.compose(replaceColon).apply("key:value");
+        System.out.println(result1);
+
     }
     public LambdasDemo(){};
     public LambdasDemo(String message){
