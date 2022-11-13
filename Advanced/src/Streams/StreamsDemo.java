@@ -2,6 +2,7 @@ package Streams;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -102,6 +103,20 @@ public class StreamsDemo {
         System.out.println(res5.getTitle());
         var res6 = movies.stream().min(Comparator.comparing(Movie::getTitle)).get();
         System.out.println(res6.getTitle());
+
+        // General purpose reduction operation, gives more control over reducing the streams
+        // Optional<Integer> sum = movies.stream().map(Movie::getLikes).reduce((a, b) -> a + b);
+        Optional<Integer> sum = movies.stream().map(Movie::getLikes).reduce(Integer::sum);
+        // working: after map method we would have stream of likes as [10,20,30]
+        // then we would calculate the sum of first 2 indexes [30,30] then at the end we would en up with the
+        // result [60], job of this accumulator is to accumulate values
+        // NOw also it return an optional type, so optional classes represents objects which may or may not have a value
+        // System.out.println(sum.get()); => this would throw an error if we don't have nay value instead
+        System.out.println(sum.orElse(0));
+
+        // another method for sum
+        Integer sum1 = movies.stream().map(Movie::getLikes).reduce(0, Integer::sum);
+        System.out.println(sum1);
     }
 
 }
