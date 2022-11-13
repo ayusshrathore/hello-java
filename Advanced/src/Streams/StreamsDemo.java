@@ -1,5 +1,6 @@
 package Streams;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -55,6 +56,14 @@ public class StreamsDemo {
         // takeWhile & dropWhile
         // it stops exactly when an predicate returns false
         movies.stream().takeWhile(movie -> movie.getLikes() > 30).forEach(movie -> System.out.println(movie));
+
+        // Sorting streams
+        movies.stream().sorted((a, b) -> a.getTitle().compareTo(b.getTitle())).forEach(m-> m.getTitle());
+        // another method
+        movies.stream().sorted(Comparator.comparing(Movie::getTitle)).forEach(m -> System.out.println(m));
+        // reverse stream
+        movies.stream().sorted(Comparator.comparing(Movie::getTitle).reversed()).forEach(m -> System.out.println(m));
+
     }
 
 }
