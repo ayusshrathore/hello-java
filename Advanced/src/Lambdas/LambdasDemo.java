@@ -1,6 +1,7 @@
 package Lambdas;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class LambdasDemo {
     public String suffix = ".";
@@ -62,7 +63,14 @@ public class LambdasDemo {
         // need to be done
         // forEach excepts a consumer object of type integer it is of type (IntConsumer)
         list.forEach(item -> System.out.println(item));
+
+        // Chaining consumers
+        List<String> list1 = List.of("a", "b", "c");
+        Consumer<String> print = item -> System.out.println(item);
+        Consumer<String> printUpperCase = item -> System.out.println(item.toUpperCase());
+        list1.forEach(print.andThen(printUpperCase));
     }
+    public LambdasDemo(){};
     public LambdasDemo(String message){
 
     }
