@@ -10,6 +10,7 @@ public class StreamsDemo {
         // Functional vs Imperative Programming
         List<Movie> movies = List.of(
                 new Movie("a", 10),
+                new Movie("a", 10),
                 new Movie("b", 20),
                 new Movie("c", 30)
         );
@@ -63,6 +64,11 @@ public class StreamsDemo {
         movies.stream().sorted(Comparator.comparing(Movie::getTitle)).forEach(m -> System.out.println(m));
         // reverse stream
         movies.stream().sorted(Comparator.comparing(Movie::getTitle).reversed()).forEach(m -> System.out.println(m));
+
+        // Getting unique elements from streams
+        movies.stream().map(Movie::getLikes)
+                .distinct()
+                .forEach(System.out::println);
 
     }
 
