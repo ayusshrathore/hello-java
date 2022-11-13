@@ -70,6 +70,13 @@ public class StreamsDemo {
                 .distinct()
                 .forEach(System.out::println);
 
+        // Peeking elements in stream, enables us to get o/p of each operation
+        movies.stream()
+                .filter(movie -> movie.getLikes() > 10)
+                .peek(m -> System.out.println("filtered: " + m.getTitle())) // intermediate operation can be used to build processing pipeline
+                .map(Movie::getTitle)
+                .peek(t -> System.out.println("mapped: " + t))
+                .forEach(System.out::println);
     }
 
 }
