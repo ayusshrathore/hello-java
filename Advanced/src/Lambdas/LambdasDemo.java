@@ -1,10 +1,7 @@
 package Lambdas;
 
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public class LambdasDemo {
     public String suffix = ".";
@@ -122,6 +119,21 @@ public class LambdasDemo {
 
         var leftOrRightBrace = hasLeftBrace.or(hasRightBrace);
         var noLeftBrace = hasLeftBrace.negate();
+
+        // BinaryOperator Interface
+        BinaryOperator<Integer> add = (a, b) -> a + b;
+        var result3 = add.apply(1, 2); // since primitive integer need to be autoboxed inside instances of an
+        // Integer class it is ideal to use IntBinaryOperator instead which is cost-efficient
+        Function<Integer, Integer> squares = a -> a * a;
+        var result4 = add.andThen(squares).apply(1,2);
+        System.out.println(result4);
+
+        // UnaryOperator Interface
+        UnaryOperator<Integer> square = n -> n * n;
+        UnaryOperator<Integer> increment = n -> n + 1;
+
+        var result5 = increment.andThen(square).apply(1);
+        System.out.println(result5);
     }
     public LambdasDemo(){};
     public LambdasDemo(String message){
