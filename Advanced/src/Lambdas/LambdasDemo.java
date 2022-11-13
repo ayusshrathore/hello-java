@@ -3,6 +3,7 @@ package Lambdas;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class LambdasDemo {
@@ -105,6 +106,22 @@ public class LambdasDemo {
         var result1 = addBraces.compose(replaceColon).apply("key:value");
         System.out.println(result1);
 
+
+        // Predicate interface
+        Predicate<String> isLongerThan5 = str -> str.length() > 5;
+        var res = isLongerThan5.test("sky");
+        System.out.println(res);
+
+        // combining predicates to build complex predicates
+        Predicate<String> hasLeftBrace = str -> str.startsWith("{");
+        Predicate<String> hasRightBrace = str -> str.endsWith("}");
+
+        var hasLeftAndRightBraces = hasLeftBrace.and(hasRightBrace);
+        var result2 = hasLeftAndRightBraces.test("{key:value}");
+        System.out.println(result2);
+
+        var leftOrRightBrace = hasLeftBrace.or(hasRightBrace);
+        var noLeftBrace = hasLeftBrace.negate();
     }
     public LambdasDemo(){};
     public LambdasDemo(String message){
