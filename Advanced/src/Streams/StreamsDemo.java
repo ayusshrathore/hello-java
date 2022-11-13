@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamsDemo {
@@ -117,6 +118,27 @@ public class StreamsDemo {
         // another method for sum
         Integer sum1 = movies.stream().map(Movie::getLikes).reduce(0, Integer::sum);
         System.out.println(sum1);
+
+        // Collectors
+       var result = movies.stream().filter(movie -> movie.getLikes() > 10).collect(Collectors.toList());
+       var result1 = movies.stream().filter(movie -> movie.getLikes() > 10).collect(Collectors.toSet());
+
+       // Title (key), Likes(value)
+       var result2 = movies.stream().filter(movie -> movie.getLikes() > 10).collect(Collectors.
+               toMap(Movie::getTitle, Movie::getLikes));
+
+       var sumOfLikes = movies.stream().filter(movie ->  movie.getLikes() > 10)
+                       .collect(Collectors.summingInt(Movie::getLikes));
+       System.out.println(sumOfLikes);
+
+     var summary = movies.stream().filter(movie ->  movie.getLikes() > 10)
+             .collect(Collectors.summarizingInt(Movie::getLikes));
+     System.out.println(summary);
+
+     // joining
+     var mapLikesWithTitle = movies.stream().filter(movie ->  movie.getLikes() > 10).map(Movie::getTitle)
+             .collect(Collectors.joining(", "));
+     System.out.println(mapLikesWithTitle);
     }
 
 }
