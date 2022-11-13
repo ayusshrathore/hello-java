@@ -1,5 +1,7 @@
 package Lambdas;
 
+import java.util.List;
+
 public class LambdasDemo {
     public String suffix = ".";
     public void show(){
@@ -47,6 +49,19 @@ public class LambdasDemo {
         // Passing a value to a constructor
         greet(message -> new LambdasDemo(message));
         greet(LambdasDemo::new);
+
+
+        //Consumer Interface
+        List<Integer> list = List.of(1,2,3);
+
+        // Imperative programming -> implementing logics using instructions (for, if/else, switch/case)
+        for(var item: list)
+            System.out.println(item);
+
+        // Declarative programming instead of instructions to specify how it needs to be done, we mention only what's
+        // need to be done
+        // forEach excepts a consumer object of type integer it is of type (IntConsumer)
+        list.forEach(item -> System.out.println(item));
     }
     public LambdasDemo(String message){
 
