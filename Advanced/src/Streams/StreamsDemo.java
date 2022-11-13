@@ -77,6 +77,31 @@ public class StreamsDemo {
                 .map(Movie::getTitle)
                 .peek(t -> System.out.println("mapped: " + t))
                 .forEach(System.out::println);
+
+
+        // Simple Reducers
+        // count
+        movies.stream().count();
+        // anyMatch
+        var res = movies.stream().anyMatch(movie -> movie.getLikes() > 20);
+        System.out.println(res);
+        // allMatch
+        var res1 = movies.stream().allMatch(movie -> movie.getLikes() > 20);
+        System.out.println(res1);
+        // notMatch
+        var res2 = movies.stream().noneMatch(movie -> movie.getLikes() > 20);
+        System.out.println(res2);
+        // findFirst it's return type is Optional<Movie> optional classes prevents us from getting NullPointerExceptions
+        var res3 = movies.stream().findFirst().get();
+        System.out.println(res3.getTitle());
+        // findAny
+        var res4 = movies.stream().findAny().get();
+        System.out.println(res4.getTitle());
+        // max or min
+        var res5 = movies.stream().max(Comparator.comparing(Movie::getTitle)).get();
+        System.out.println(res5.getTitle());
+        var res6 = movies.stream().min(Comparator.comparing(Movie::getTitle)).get();
+        System.out.println(res6.getTitle());
     }
 
 }
