@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StreamsDemo {
@@ -169,6 +170,12 @@ public class StreamsDemo {
                 .stream().collect(Collectors.partitioningBy(m -> m.getLikes() > 20, Collectors
                         .mapping(Movie::getTitle, Collectors.joining(", "))));
      System.out.println(result4);
-    }
 
+    // Primitive type streams
+    // IntStream.generate(), IntStream.iterate(); generate finite or infinite streams
+    // IntStream.of() generate stream of arbitrary sequence of objects
+    IntStream.range(1, 5).forEach(System.out::println); // upper bound not inclusive
+    IntStream.rangeClosed(1, 5).forEach(System.out::println); // upper bound inclusive
+    // Note: all other stuff such as mapping, filtering, slicing, collecting etc are same
+    }
 }
