@@ -1,6 +1,7 @@
 package Streams;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class StreamsDemo {
@@ -32,6 +33,28 @@ public class StreamsDemo {
         var stream = Stream.of(List.of(1,2,3), List.of(4,5,6));
         stream.flatMap(list -> list.stream()).
                 forEach(num -> System.out.println(num));
+
+        // Filtering streams
+        // Termination or terminal operation with streams
+        Predicate<Movie> isPopular = movie -> movie.getLikes() > 10;
+        movies.stream().filter(isPopular).forEach(movie -> System.out.println(movie.getTitle()));
+
+        // Slicing Streams
+        // limit
+        movies.stream().limit(2).forEach(movie -> System.out.println(movie));
+        // skip
+        movies.stream().skip(2).forEach(movie -> System.out.println(movie));
+
+        // illustration (pagination)
+        // 1000 movies
+        // 10 per page
+        // skip(20) = skip((page - 1) x pageSize)
+        // limit(10) = limit(pageSize)
+        movies.stream().skip(20).limit(10).forEach(movie -> System.out.println(movie));
+
+        // takeWhile & dropWhile
+        // it stops exactly when an predicate returns false
+        movies.stream().takeWhile(movie -> movie.getLikes() > 30).forEach(movie -> System.out.println(movie));
     }
 
 }
