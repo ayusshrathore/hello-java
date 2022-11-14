@@ -2,21 +2,16 @@ package Concurrency;
 
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 
 public class DownloadStatus {
-    private AtomicInteger totalBytes = new AtomicInteger();
-    private int totalFiles;
+    // Having multiple threads updating a value frequently it's better to use adder class being faster than atomic types
+    private LongAdder totalBytes = new LongAdder();
 
     public int getTotalBytes() {
-        return totalBytes.get();
+        return totalBytes.intValue();
     }
     public void incrementTotalBytes(){
-            totalBytes.getAndIncrement(); // atomic operation performed by cpu using a technique called compare & swap
-    }
-    public void incrementTotalFiles(){
-            totalFiles++;
-    }
-    public int getTotalFiles() {
-        return totalFiles;
+            totalBytes.increment(); // atomic operation performed by cpu using a technique called compare & swap
     }
 }
