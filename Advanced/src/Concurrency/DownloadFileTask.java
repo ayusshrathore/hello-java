@@ -20,10 +20,12 @@ public class DownloadFileTask implements Runnable{
 //            throw new RuntimeException(e);
 //        }
         // Simulating long task
-        for (int i = 0; i < 10_000; i++) {
+        for (int i = 0; i < 1_000_000; i++) {
             if(Thread.currentThread().isInterrupted()) return; // checking for interrupt request
             status.incrementTotalBytes();
         }
+
+        status.done();
 
         System.out.println("Download complete: " + Thread.currentThread().getName());
     }
