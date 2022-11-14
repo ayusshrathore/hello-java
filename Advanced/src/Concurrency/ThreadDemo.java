@@ -64,7 +64,16 @@ public class ThreadDemo {
         var status1 = new DownloadStatus();
         var thread1 = new Thread(new DownloadFileTask(status1));
         var thread2 = new Thread(() -> {
-            while (!status.isDone()){}
+            // this will not make millions of requests and wait cpu cycles
+            while (!status.isDone()){
+                synchronized (status1) {
+                    try {
+                        status1.wait();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
             System.out.println(status.getTotalBytes());
         });
 
