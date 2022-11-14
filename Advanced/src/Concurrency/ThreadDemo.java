@@ -1,6 +1,7 @@
 package Concurrency;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ThreadDemo {
     public static void show(){
@@ -62,7 +63,7 @@ public class ThreadDemo {
 
         // Synchronized collection
         Collection<Integer> collection = Collections.synchronizedCollection(new ArrayList<>()); // wrapper around
-        // collection interface with synchronized code
+        // collection interface with synchronized code, these achieve thread safety by locks
 
         var thread1 = new Thread(() -> {
             collection.addAll(Arrays.asList(1,2,3));
@@ -82,5 +83,14 @@ public class ThreadDemo {
         }
 
         System.out.println(collection);
+
+        // Concurrent collections -> The classes which implement this interface uses partitioning technique to allow
+        // concurrency these threads allow data to divide into different segments & different threads can work upon
+        // different segments
+        Map<Integer, String> map = new ConcurrentHashMap<>();
+        map.put(1,"A");
+        map.put(2,"B");
+        map.remove(1);
+        System.out.println(map.get(2));
     }
 }
