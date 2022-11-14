@@ -5,18 +5,24 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class DownloadStatus {
     private int totalBytes;
-    private Lock lock = new ReentrantLock();
+    private int totalFiles;
+    private Object totalBytesLock = new Object();
+    private Object totalFilesLock = new Object();
 
     public int getTotalBytes() {
         return totalBytes;
     }
     public void incrementTotalBytes(){
-        lock.lock();
-        try{
+        synchronized (totalBytesLock){
             totalBytes++; // non atomic operation
         }
-        finally {
-            lock.unlock();
+    }
+    public void incrementTotalFiles(){
+        synchronized (totalFilesLock){
+            totalFiles++;
         }
+    }
+    public int getTotalFiles() {
+        return totalFiles;
     }
 }
