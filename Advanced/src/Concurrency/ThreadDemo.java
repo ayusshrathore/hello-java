@@ -44,12 +44,9 @@ public class ThreadDemo {
 
         // Issues with concurrency (Racing Condition)
         List<Thread> threads = new ArrayList<>();
-        List<DownloadFileTask> tasks = new ArrayList<>();
+        var status = new DownloadStatus();
         for (int i = 0; i <10; i++) {
-            var task = new DownloadFileTask();
-            tasks.add(task);
-
-            Thread thread1 = new Thread(task);
+            Thread thread1 = new Thread(new DownloadFileTask(status));
             thread1.start();
             threads.add(thread1);
         }
@@ -61,9 +58,6 @@ public class ThreadDemo {
                 throw new RuntimeException(e);
             }
         }
-        var totalBytes = tasks.stream().map(task -> task.getStatus().getTotalBytes())
-                .reduce(Integer::sum);
-        System.out.println(totalBytes); // preventing race condition using confinement by using different
-        // status objects and combining them later to get the result
+        System.out.println(status.getTotalBytes());
     }
 }

@@ -4,8 +4,10 @@ package Concurrency;
 public class DownloadFileTask implements Runnable{
     private DownloadStatus status;
 
-    public  DownloadFileTask(){
-        this.status = new DownloadStatus();
+    public DownloadFileTask(){};
+
+    public  DownloadFileTask(DownloadStatus status){
+        this.status = status;
     };
 
     @Override
