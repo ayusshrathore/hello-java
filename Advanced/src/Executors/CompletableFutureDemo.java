@@ -68,5 +68,16 @@ public class CompletableFutureDemo {
                     }
                     System.out.println("ALl tasks executed successfully");
                 });
+
+        // waiting for the first task
+        var slowWeatherAPI = CompletableFuture.supplyAsync(() -> {
+            LongTask.simulate();
+            return 20;
+        });
+        var fastWeatherAPI = CompletableFuture.supplyAsync(() -> 20);
+
+        // wait for completion of one of the completable future completes
+        CompletableFuture.anyOf(slowWeatherAPI, fastWeatherAPI)
+                .thenAccept(System.out::println);
     }
 }
