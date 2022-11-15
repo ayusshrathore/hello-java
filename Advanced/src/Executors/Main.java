@@ -9,5 +9,17 @@ public class Main {
     public static void main(String[] args) {
         ExecutorsDemo.show();
         CompletableFutureDemo.show();
+
+        // Asynchronous API demo
+        var service = new MailService(); // This is a synchronous or a blocking code
+        // so we won't be able to see the print statement below until send() method is completes its job
+        service.sendAsync(); // they don't block the current thread and better exploit the parallel hardware
+        System.out.println("Hello World");
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
