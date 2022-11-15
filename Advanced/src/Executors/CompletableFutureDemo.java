@@ -2,6 +2,7 @@ package Executors;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 public class CompletableFutureDemo {
@@ -79,5 +80,19 @@ public class CompletableFutureDemo {
         // wait for completion of one of the completable future completes
         CompletableFuture.anyOf(slowWeatherAPI, fastWeatherAPI)
                 .thenAccept(System.out::println);
+
+        // handling timeouts
+        var futureResult = CompletableFuture.supplyAsync(() -> {
+            LongTask.simulate();
+            return 1;
+        });
+        try {
+            var res = futureResult.
+                    completeOnTimeout(1, 1, TimeUnit.SECONDS).get();
+            //completeOnTimeout(defaultValue, timeout: how long, timeout: unit)
+            System.out.println(res);
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
