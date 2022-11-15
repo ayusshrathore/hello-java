@@ -1,10 +1,16 @@
 package Executors;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.function.Supplier;
 
 public class CompletableFutureDemo {
+    // Since querying a DB is long waiting task we should return CompletableFuture<String> obj
+    public static CompletableFuture<String> getUserEmailAsync(){
+        return CompletableFuture.supplyAsync(() -> "john@email.com");
+    }
+    public static CompletableFuture<String> getPlaylistAsync(String email){
+        return CompletableFuture.supplyAsync(() -> email + ": Alan-Walker");
+    }
     public static int toFahrenheit(int celsius){
         return (int) (celsius * 1.8) + 32;
     }
@@ -24,5 +30,10 @@ public class CompletableFutureDemo {
         // with CompletableFuture we don't really
         // need to create an executor, submit a task to it and finally shutdown CompletableFuture does
         // this own its own
+
+        // Composing Completable Futures
+        getUserEmailAsync()
+                .thenCompose(CompletableFutureDemo::getPlaylistAsync)
+                .thenAccept(System.out::println);
     }
 }
