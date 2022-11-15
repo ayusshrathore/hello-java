@@ -14,9 +14,10 @@ public class CompletableFutureDemo {
         // Running code on completion of asynchronous task
         // .thenRunAsync() will execute underlying task on a different thread
         // whereas .thenRun() will execute it on main thread
-        future.thenRunAsync(() -> {
+        // .thenAccept() takes an consumer object
+        future.thenAcceptAsync((result) -> {
             System.out.println(Thread.currentThread().getName());
-            System.out.println("Done");
+            System.out.println(result);
         });
         // with CompletableFuture we don't really
         // need to create an executor, submit a task to it and finally shutdown CompletableFuture dones
