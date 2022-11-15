@@ -1,6 +1,7 @@
 package Executors;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.function.Supplier;
 
 public class CompletableFutureDemo {
@@ -35,5 +36,37 @@ public class CompletableFutureDemo {
         getUserEmailAsync()
                 .thenCompose(CompletableFutureDemo::getPlaylistAsync)
                 .thenAccept(System.out::println);
+
+        // Combining completable futures
+        var first = CompletableFuture
+                .supplyAsync(() -> "20USD")
+                .thenApply(str -> {
+                    var price = str.replace("USD", "");
+                    return Integer.parseInt(price);
+                });
+
+        var second = CompletableFuture.supplyAsync(() -> 0.9);
+
+        first.thenCombine(second, (price, exchangeRate) -> price * exchangeRate)
+                .thenAccept(System.out::println);
+
+
+        // Waiting for many tasks
+        var task1 = CompletableFuture.supplyAsync(() -> 1);
+        var task2 = CompletableFuture.supplyAsync(() -> 2);
+        var task3 = CompletableFuture.supplyAsync(() -> 3);
+
+        CompletableFuture.allOf(task1, task2, task3)
+                .thenRun(() -> {
+                    try {
+                        var firstResult = task1.get();
+                        var secondResult = task2.get();
+                        var thirdResult = task3.get();
+                        System.out.println(firstResult + secondResult + thirdResult);
+                    } catch (InterruptedException | ExecutionException  e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println("ALl tasks executed successfully");
+                });
     }
 }
