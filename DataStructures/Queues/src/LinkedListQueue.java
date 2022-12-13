@@ -41,7 +41,6 @@ public class LinkedListQueue {
             tail = node;
         }
         size++;
-
     }
 
     public int dequeue() {
@@ -60,7 +59,6 @@ public class LinkedListQueue {
         second.next = null;
         size--;
         return ele;
-
     }
 
     public int peek() {

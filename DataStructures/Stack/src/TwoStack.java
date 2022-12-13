@@ -27,7 +27,6 @@ public class TwoStack {
         this.top1 = -1;
         this.top2 = size;
         this.stack = new int[size];
-
     }
 
     /**

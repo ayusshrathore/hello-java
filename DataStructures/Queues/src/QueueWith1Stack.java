@@ -28,10 +28,9 @@ public class QueueWith1Stack {
 
   public void push(int x) {
     stack.push(x);
-
+    // 1 2 3 4 5
     for (int i = 0; i < stack.size() - 1; i++)
       stack.push(stack.pop());
-
   }
 
   public int pop() {
