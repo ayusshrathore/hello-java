@@ -55,9 +55,9 @@ public class Search {
   }
 
   private int ternarySearch(int left, int right, int item) {
-    int partitioSize = (size - 1) / 3;
-    int mid1 = left + partitioSize;
-    int mid2 = right - partitioSize;
+    int partitionSize = (size - 1) / 3;
+    int mid1 = left + partitionSize;
+    int mid2 = right - partitionSize;
 
     if (left > right)
       return -1;
