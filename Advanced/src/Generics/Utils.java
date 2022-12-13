@@ -22,7 +22,7 @@ public class Utils {
     // & in order to write to the list we should use GenericList<? super User> to imitate as Object class
     // which is the parent of User class
     public static void printUsers(GenericList<? super User> users){
-        // User x = users.get(0); throws error as java compiler doesn't known as the object we are getting
+        // User x = users.get(0); throws error as java compiler doesn't know as the object we are getting
         // is compatible with the User it could be string obj or a datetime obj etc...
         users.add(new Instructor(10));
         users.add(new User(20));
