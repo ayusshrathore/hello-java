@@ -95,9 +95,7 @@ public class LinkList {
 
     // contains
     public boolean contains(int data) {
-        if (indexOf(data) != -1)
-            return true;
-        return false;
+        return indexOf(data) != -1;
     }
 
     // indexof
@@ -109,7 +107,6 @@ public class LinkList {
                 return index;
             current = current.next;
             index++;
-
         }
         return -1;
     }
@@ -132,7 +129,7 @@ public class LinkList {
 
     public void reverse() {
         // [10 -> 20 -> 30 -> 40 -> 50]
-        // [10 <- 1 <- 40 <- 50]
+        // [10 <- 20 <- 30 <- 40 <- 50]
         if (isEmpty())
             return;
 
@@ -190,7 +187,7 @@ public class LinkList {
     // alternative way to get kth element from last. with known list size
     public int getKthFromLast(int k) {
         // [1 -> 2 -> 3 -> 4 -> 5]
-        // * *
+        //  *    *
         if (isEmpty())
             throw new IllegalStateException();
         var previous = first;
