@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Graph {
     private class Node{
@@ -63,6 +60,19 @@ public class Graph {
         if(fromNode == null || toNodes == null) return;
 
         adjacencyList.get(fromNode).remove(toNodes);
+    }
+
+    public void traverseDepthFirst(String label){
+        traverseDepthFirst(nodes.get(label), new HashSet<>());
+    }
+
+    private void traverseDepthFirst(Node root, Set<Node> visited){
+        System.out.println(root);
+        visited.add(root);
+
+        for(var node: adjacencyList.get(root))
+            if(!visited.contains(node)) traverseDepthFirst(node, visited);
+
     }
     public void print(){
         for(var source: adjacencyList.keySet()){

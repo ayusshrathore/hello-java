@@ -10,5 +10,6 @@ public class Main {
         graph.print();
         graph.removeEdge("A", "C");
         graph.print();
+        graph.traverseDepthFirst("A");
     }
 }
