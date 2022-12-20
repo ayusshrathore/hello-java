@@ -63,6 +63,9 @@ public class Graph {
     }
 
     public void traverseDepthFirst(String label){
+        var node = nodes.get(label);
+        if(node == null) return;
+
         traverseDepthFirst(nodes.get(label), new HashSet<>());
     }
 
