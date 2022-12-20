@@ -1,0 +1,11 @@
+Graph
+    Node (Private)
+        label: String
+
+    addNode(label)
+    removeNode(label)
+    addEdge(from, to)
+    removeEdge(from, to)
+    print()
+        A is connected with [B, C]
+        B is connected with [A]
