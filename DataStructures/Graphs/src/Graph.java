@@ -45,6 +45,25 @@ public class Graph {
         // adjacencyList.get(toNode).add(fromNode);
     }
 
+    public void removeNode(String label){
+        var node = nodes.get(label);
+        if(node == null) return;
+
+        for(var n : adjacencyList.keySet())
+            adjacencyList.get(n).remove(node);
+
+        adjacencyList.remove(node);
+        nodes.remove(node);
+    }
+
+    public void removeEdge(String from, String to){
+        var fromNode = nodes.get(from);
+        var toNodes = nodes.get(to);
+
+        if(fromNode == null || toNodes == null) return;
+
+        adjacencyList.get(fromNode).remove(toNodes);
+    }
     public void print(){
         for(var source: adjacencyList.keySet()){
             var targets = adjacencyList.get(source);
