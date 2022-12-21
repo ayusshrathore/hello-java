@@ -145,6 +145,41 @@ public class Graph {
 
         stack.push(node);
     }
+
+    public boolean hasCycle(){
+        Set<Node> all = new HashSet<>(nodes.values());
+        Set<Node> visiting = new HashSet<>();
+        Set<Node> visited = new HashSet<>();
+
+        while(!all.isEmpty()){
+            // inefficient approach as it takes more space to allocate an entire array to get an element from array
+            // var curr = all.toArray(new Node[0])[0]; // toArray method returns array of Object to return Node object we need
+            // to pass new Node[0] as parameter
+            var curr = all.iterator().next();
+            if(hasCycle(curr, all, visiting, visited)) return true;
+        }
+
+        return false;
+    }
+
+    private boolean hasCycle(Node node, Set<Node> all, Set<Node> visiting, Set<Node> visited){
+        all.remove(node);
+        visiting.add(node);
+
+        for (var neighbour: adjacencyList.get(node)){
+            if(visited.contains(neighbour)) continue;
+
+            if(visiting.contains(neighbour)) return true; // a way back to node which is still in
+            // visiting set and is not visited
+
+            if(hasCycle(neighbour, all, visiting, visited)) return true; // otherwise first we need to visit the
+            // neighbours of that neighbour
+        }
+        visiting.remove(node);
+        visited.add(node);
+
+        return false;
+    }
     public void print(){
         for(var source: adjacencyList.keySet()){
             var targets = adjacencyList.get(source);
