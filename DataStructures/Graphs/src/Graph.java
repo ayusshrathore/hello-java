@@ -87,6 +87,7 @@ public class Graph {
     private void traverseDepthFirstIterative(Node root, Stack<Node> stack){
         Set<Node> visited = new HashSet<>();
         stack.push(root);
+
         while(!stack.isEmpty()){
             var curr = stack.pop();
             if(!visited.contains(curr)){
@@ -96,6 +97,29 @@ public class Graph {
                     if(!visited.contains(node)) stack.push(node); // if not visited any neighbour
             }
         }
+    }
+
+    public void traverseBreadthFirst(String root){
+        var node = nodes.get(root);
+        if(node == null) return;
+
+        traverseBreadthFirst(node, new ArrayDeque<>());
+    }
+    private void traverseBreadthFirst(Node root, Queue<Node> queue){
+        Set<Node> visited = new HashSet<>();
+        queue.add(root);
+
+        while(!queue.isEmpty()) {
+            var curr = queue.remove();
+            if (!visited.contains(curr)) {
+                System.out.println(curr);
+                visited.add(curr);
+
+                for (var node : adjacencyList.get(curr))
+                    if (!visited.contains(node)) queue.add(node);
+            }
+        }
+
     }
     public void print(){
         for(var source: adjacencyList.keySet()){
