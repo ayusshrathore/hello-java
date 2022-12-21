@@ -121,6 +121,30 @@ public class Graph {
         }
 
     }
+
+    public List<String> topoLogicalSort(){
+        Stack<Node> stack = new Stack<>();
+        Set<Node> visited = new HashSet<>();
+
+        for (var node : nodes.values())
+            topoLogicalSort(node, visited, stack);
+
+        List<String> sorted = new ArrayList<>();
+        while(!stack.isEmpty())
+            sorted.add(stack.pop().label);
+
+        return sorted;
+    }
+    private void topoLogicalSort(Node node, Set<Node> visited, Stack<Node> stack){
+        if(visited.contains(node))
+            return;
+
+        visited.add(node);
+        for (var neighbour : adjacencyList.get(node))
+                topoLogicalSort(neighbour, visited, stack);
+
+        stack.push(node);
+    }
     public void print(){
         for(var source: adjacencyList.keySet()){
             var targets = adjacencyList.get(source);
