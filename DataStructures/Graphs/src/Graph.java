@@ -62,11 +62,11 @@ public class Graph {
         adjacencyList.get(fromNode).remove(toNodes);
     }
 
-    public void traverseDepthFirst(String label){
-        var node = nodes.get(label);
+    public void traverseDepthFirst(String root){
+        var node = nodes.get(root);
         if(node == null) return;
 
-        traverseDepthFirst(nodes.get(label), new HashSet<>());
+        traverseDepthFirst(node, new HashSet<>());
     }
 
     private void traverseDepthFirst(Node root, Set<Node> visited){
@@ -76,6 +76,26 @@ public class Graph {
         for(var node: adjacencyList.get(root))
             if(!visited.contains(node)) traverseDepthFirst(node, visited);
 
+    }
+
+    public void traverseDepthFirstIterative(String root){
+        var node = nodes.get(root);
+        if(node == null) return;
+        traverseDepthFirstIterative(node, new Stack<>());
+    }
+
+    private void traverseDepthFirstIterative(Node root, Stack<Node> stack){
+        Set<Node> visited = new HashSet<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            var curr = stack.pop();
+            if(!visited.contains(curr)){
+                System.out.println(curr);
+                visited.add(curr);
+                for(var node : adjacencyList.get(curr))
+                    if(!visited.contains(node)) stack.push(node); // if not visited any neighbour
+            }
+        }
     }
     public void print(){
         for(var source: adjacencyList.keySet()){
