@@ -1,0 +1,8 @@
+WeightedGraph
+    Node
+    Edge
+        from
+        to
+        weight
+    addNode()
+    addEdge(from, to, weight)
