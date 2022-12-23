@@ -8,5 +8,6 @@ public class Main {
         graph.addEdge("A", "B", 2);
         graph.addEdge("A", "C", 3);
         graph.print();
+        System.out.println(graph.getShortestPath("A", "C"));
     }
 }
