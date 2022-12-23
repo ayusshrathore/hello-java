@@ -139,6 +139,38 @@ public class WeightedGraph {
         }
         return false;
     }
+
+    public WeightedGraph getMinimumSpanningTree(){
+        var tree =  new WeightedGraph();
+
+        if(nodes.isEmpty()) return tree; // if tree has no nodes
+
+        PriorityQueue<Edge> edges = new PriorityQueue<>(
+                Comparator.comparingInt(edge -> edge.weight)
+        );
+        var startNode = nodes.values().iterator().next();
+        edges.addAll(startNode.getEdges());
+        tree.addNode(startNode.label);
+
+        if(edges.isEmpty()) return tree; // if our nodes have no edges
+
+        while(tree.nodes.size() < nodes.size()) {
+            var minEdge = edges.remove();
+            var nextNode = minEdge.to;
+
+            if(tree.containsNode(nextNode.label)) continue; // if we already have an entry with this node in our hashtable
+
+            tree.addNode(nextNode.label); // add the edge and target node to our tee
+            tree.addEdge(minEdge.from.label, nextNode.label, minEdge.weight);
+
+            for (var edge : nextNode.getEdges())
+                if(!tree.containsNode(edge.to.label)) edges.add(edge);
+        }
+        return tree;
+    }
+    public boolean containsNode(String label){
+        return nodes.containsKey(label);
+    }
     public void print(){
         for(var node: nodes.values()){
             var edges = node.getEdges();
