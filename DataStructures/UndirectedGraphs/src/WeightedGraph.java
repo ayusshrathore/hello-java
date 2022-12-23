@@ -68,12 +68,19 @@ public class WeightedGraph {
             this.priority = priority;
         }
     }
-    public int getShortestPath(String from, String to){
+    public Path getShortestPath(String from, String to){
         var fromNode = nodes.get(from);
+        if(fromNode == null) throw new IllegalArgumentException();
+
+        var toNode = nodes.get(to);
+        if(toNode == null) throw new IllegalArgumentException();
+
         Map<Node, Integer> distances = new HashMap<>();
         for (Node node : nodes.values())
             distances.put(node, Integer.MAX_VALUE);
 
+        Map<Node, Node> previousNodes = new HashMap<>(); // hashmap for storing previous linked nodes
+        // in order to get the entire path
         distances.replace(fromNode, 0); // make distance from node A->A = 0
 
         Set<Node> visited =  new HashSet<>();
@@ -87,15 +94,34 @@ public class WeightedGraph {
             visited.add(curr); // mark visited
 
             for (var edge : curr.getEdges()){
-                if(visited.contains(to)) continue;
+                if(visited.contains(toNode)) continue;
 
                 var newDistance = distances.get(curr) + edge.weight;
-                if(newDistance < distances.get(edge.to)) distances.replace(edge.to, newDistance);
-                queue.add(new NodeEntry(edge.to, newDistance));
+                if(newDistance < distances.get(edge.to)) {
+                    distances.replace(edge.to, newDistance);
+                    previousNodes.put(edge.to, curr);
+                    queue.add(new NodeEntry(edge.to, newDistance));
+                }
             }
         }
-        return distances.get(nodes.get(to));
+
+        return buildPath(toNode, previousNodes);
     }
+
+    private static Path buildPath(Node toNode, Map<Node, Node> previousNodes) {
+        Stack<Node> stack = new Stack<>(); // to insert all nodes inside and pop them to get original path
+        stack.push(toNode);
+        var previous = previousNodes.get(toNode);
+        while(previous != null){
+            stack.push(previous);
+            previous = previousNodes.get(previous);
+        }
+
+        var path = new Path();
+        while (!stack.isEmpty()) path.addNode(stack.pop().label);
+        return path;
+    }
+
     public void print(){
         for(var node: nodes.values()){
             var edges = node.getEdges();

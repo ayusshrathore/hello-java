@@ -6,7 +6,8 @@ public class Main {
         graph.addNode("B");
         graph.addNode("C");
         graph.addEdge("A", "B", 2);
-        graph.addEdge("A", "C", 3);
+        graph.addEdge("B", "C", 3);
+        graph.addEdge("A", "C", 7);
         graph.print();
         System.out.println(graph.getShortestPath("A", "C"));
     }
