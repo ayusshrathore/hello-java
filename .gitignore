@@ -1,4 +1,7 @@
 .vscode
+Exercise
 .idea
 *.iml
 out
+bin
+*.class
